@@ -10,8 +10,8 @@ namespace PerformanceAnalyzerKataExercise.GQIDSs
 
 	using Skyline.DataMiner.Analytics.GenericInterface;
 
-	[GQIMetaData(Name = "Table")]
-	public sealed class TableGQIDS : IGQIDataSource, IGQIOnPrepareFetch, IGQIOnDestroy, IGQIInputArguments
+	[GQIMetaData(Name = "Employees Table")]
+	public sealed class EmployeesGQIDS : IGQIDataSource, IGQIOnPrepareFetch, IGQIOnDestroy, IGQIInputArguments
 	{
 		private readonly InputArguments inputArguments = new InputArguments();
 

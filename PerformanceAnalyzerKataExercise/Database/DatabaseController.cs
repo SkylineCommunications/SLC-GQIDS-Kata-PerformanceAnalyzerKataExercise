@@ -53,42 +53,42 @@
 
 		private List<Employee> GetEmployees()
 		{
-			Thread.Sleep(5000);
+			MockExecution.GetEmployees();
 
 			return MockDatabase.Table;
 		}
 
 		private List<Employee> GetEmployeeById(string filter)
 		{
-			Thread.Sleep(500);
+			MockExecution.GetEmployeeById();
 
 			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeeById, filter)).ToList();
 		}
 
 		private List<Employee> GetEmployeesByName(string filter)
 		{
-			Thread.Sleep(1500);
+			MockExecution.GetEmployeesByName();
 
 			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeesByName, filter)).ToList();
 		}
 
 		private List<Employee> GetEmployeesByRole(string filter)
 		{
-			Thread.Sleep(2000);
+			MockExecution.GetEmployeesByRole();
 
 			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeesByRole, filter)).ToList();
 		}
 
 		private List<Employee> GetEmployeesByDepartment(string filter)
 		{
-			Thread.Sleep(2000);
+			MockExecution.GetEmployeesByDepartment();
 
 			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeesByDepartment, filter)).ToList();
 		}
 
 		private List<Employee> GetEmployeesByLocation(string filter)
 		{
-			Thread.Sleep(2000);
+			MockExecution.GetEmployeesByLocation();
 
 			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeesByLocation, filter)).ToList();
 		}

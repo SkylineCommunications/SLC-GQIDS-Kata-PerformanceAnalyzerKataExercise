@@ -11,7 +11,7 @@ namespace PerformanceAnalyzerKataExercise.GQIDSs
 	using Skyline.DataMiner.Analytics.GenericInterface;
 
 	[GQIMetaData(Name = "Employees Table")]
-	public sealed class EmployeesGQIDS : IGQIDataSource, IGQIOnPrepareFetch, IGQIOnDestroy, IGQIInputArguments
+	public sealed class EmployeesGQIDS : IGQIDataSource, IGQIOnPrepareFetch, IGQIInputArguments
 	{
 		private readonly InputArguments inputArguments = new InputArguments();
 
@@ -49,14 +49,6 @@ namespace PerformanceAnalyzerKataExercise.GQIDSs
 			databaseController.Connect();
 
 			return new OnPrepareFetchOutputArgs();
-		}
-
-		public OnDestroyOutputArgs OnDestroy(OnDestroyInputArgs args)
-		{
-			databaseController?.Disconnect();
-			databaseController = null;
-
-			return new OnDestroyOutputArgs();
 		}
 
 		private GQIRow CreateGQIRow(Employee employee)

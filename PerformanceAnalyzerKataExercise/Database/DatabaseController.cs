@@ -6,7 +6,6 @@
 
 	using PerformanceAnalyzerKataExercise.Database.Models;
 
-	using Skyline.DataMiner.Analytics.GenericInterface;
 	using Skyline.DataMiner.Utils.PerformanceAnalyzer;
 	using Skyline.DataMiner.Utils.PerformanceAnalyzer.Loggers;
 

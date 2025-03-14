@@ -16,7 +16,6 @@ namespace PerformanceAnalyzerKataExercise.GQIDSs
 		private readonly InputArguments inputArguments = new InputArguments();
 
 		private DatabaseController databaseController;
-		private List<Employee> allEmployees;
 
 		public GQIArgument[] GetInputArguments()
 		{
@@ -35,8 +34,8 @@ namespace PerformanceAnalyzerKataExercise.GQIDSs
 
 		public GQIPage GetNextPage(GetNextPageInputArgs args)
 		{
-			var newRows = allEmployees
-				.Where(employee => employee.Equals(inputArguments.Query, inputArguments.Filter))
+			var newRows = databaseController
+				.ExecuteQuery(inputArguments.Query, inputArguments.Filter)
 				.Select(employee => CreateGQIRow(employee))
 				.ToArray();
 
@@ -47,9 +46,6 @@ namespace PerformanceAnalyzerKataExercise.GQIDSs
 		{
 			databaseController = new DatabaseController();
 			databaseController.Connect();
-
-			allEmployees = databaseController
-				.ExecuteQuery(Query.GetEmployees, String.Empty);
 
 			return new OnPrepareFetchOutputArgs();
 		}

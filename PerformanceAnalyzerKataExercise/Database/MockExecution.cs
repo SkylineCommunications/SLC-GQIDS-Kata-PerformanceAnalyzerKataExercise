@@ -4,6 +4,16 @@
 
 	internal static class MockExecution
     {
+		internal static void Connect()
+		{
+			Thread.Sleep((((((((((((((((((30 + 10) * 2) - 20) + 50) * 2) / 2) + 75) * 3) - 30) + 600) / 2) * 4) - 250) + 1000) / 2) + 750) * 2) - 1500);
+		}
+
+		internal static void Disconnect()
+		{
+			Thread.Sleep(((((((((((((((((40 + 20) * 2) - 30) + 70) * 2) / 2) + 100) * 3) - 40) + 800) / 2) * 4) - 300) + 1500) / 2) + 1000) - 2000);
+		}
+
 		internal static void GetEmployees()
 		{
 			Thread.Sleep(((((((((((((((((((50 + 25) * 2) - 40) + 100) * 2) / 2) + 200) * 3) - 50) + 1500) / 2) * 4) - 300) + 2500) / 2) + 1250) * 2) - 2500) - (5 * (100 + (4 * 100))));

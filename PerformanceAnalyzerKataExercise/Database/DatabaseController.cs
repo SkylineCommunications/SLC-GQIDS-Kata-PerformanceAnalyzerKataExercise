@@ -3,7 +3,6 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using System.Threading;
 
 	using PerformanceAnalyzerKataExercise.Database.Models;
 
@@ -11,7 +10,7 @@
 	{
 		internal void Connect()
 		{
-			Thread.Sleep(3000);
+			MockExecution.Connect();
 		}
 
 		internal List<Employee> ExecuteQuery(Query query, string filter)
@@ -48,7 +47,7 @@
 
 		internal void Disconnect()
 		{
-			Thread.Sleep(1000);
+			MockExecution.Disconnect();
 		}
 
 		private List<Employee> GetEmployees()

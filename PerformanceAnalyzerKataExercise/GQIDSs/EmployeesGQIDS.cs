@@ -16,7 +16,6 @@ namespace PerformanceAnalyzerKataExercise.GQIDSs
 		private readonly InputArguments inputArguments = new InputArguments();
 
 		private DatabaseController databaseController;
-		private IGQILogger logger;
 
 		public GQIArgument[] GetInputArguments()
 		{

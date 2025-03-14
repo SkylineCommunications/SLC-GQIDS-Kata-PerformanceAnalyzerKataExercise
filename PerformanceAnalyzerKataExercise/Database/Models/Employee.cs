@@ -16,6 +16,11 @@
 
 		internal bool Equals(Query query, string filter)
 		{
+			if (String.IsNullOrWhiteSpace(filter))
+			{
+				return true;
+			}
+
 			switch (query)
 			{
 				case Query.GetEmployees:

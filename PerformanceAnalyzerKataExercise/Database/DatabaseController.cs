@@ -53,7 +53,7 @@
 
 		private List<Employee> GetEmployees()
 		{
-			Thread.Sleep(10000);
+			Thread.Sleep(5000);
 
 			return MockDatabase.Table;
 		}
@@ -81,14 +81,14 @@
 
 		private List<Employee> GetEmployeesByDepartment(string filter)
 		{
-			Thread.Sleep(2500);
+			Thread.Sleep(2000);
 
 			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeesByDepartment, filter)).ToList();
 		}
 
 		private List<Employee> GetEmployeesByLocation(string filter)
 		{
-			Thread.Sleep(3000);
+			Thread.Sleep(2000);
 
 			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeesByLocation, filter)).ToList();
 		}

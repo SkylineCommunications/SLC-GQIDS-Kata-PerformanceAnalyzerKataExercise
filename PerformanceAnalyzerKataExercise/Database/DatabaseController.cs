@@ -11,6 +11,7 @@
 
 	internal class DatabaseController
 	{
+		private static int instanceCount = 0;
 		private static PerformanceCollector performanceCollector;
 		private static PerformanceTracker performanceTracker;
 
@@ -20,6 +21,7 @@
 			performanceCollector = new PerformanceCollector(performanceLogger);
 
 			performanceTracker = new PerformanceTracker(performanceCollector, nameof(DatabaseController), nameof(DatabaseController));
+			instanceCount++;
 		}
 
 		internal void Connect()
@@ -72,9 +74,12 @@
 				MockExecution.Disconnect();
 			}
 
-			performanceTracker.Dispose();
-			performanceCollector = null;
-			performanceTracker = null;
+			if (--instanceCount == 0)
+			{
+				performanceTracker.Dispose();
+				performanceCollector = null;
+				performanceTracker = null;
+			}
 		}
 
 		private List<Employee> GetEmployees()

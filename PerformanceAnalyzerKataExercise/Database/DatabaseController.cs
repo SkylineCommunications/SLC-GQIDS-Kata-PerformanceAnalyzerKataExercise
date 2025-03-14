@@ -11,7 +11,7 @@
 	{
 		internal void Connect()
 		{
-			//Thread.Sleep(3000);
+			Thread.Sleep(3000);
 		}
 
 		internal List<Employee> ExecuteQuery(Query query, string filter)
@@ -48,47 +48,47 @@
 
 		internal void Disconnect()
 		{
-			//Thread.Sleep(1000);
+			Thread.Sleep(1000);
 		}
 
 		private List<Employee> GetEmployees()
 		{
-			//Thread.Sleep(5000);
+			Thread.Sleep(5000);
 
 			return MockDatabase.Table;
 		}
 
 		private List<Employee> GetEmployeeById(string filter)
 		{
-			//Thread.Sleep(1000);
+			Thread.Sleep(500);
 
 			return MockDatabase.Table.Where(employee => employee.Id.IndexOf(filter, StringComparison.OrdinalIgnoreCase) != -1).ToList();
 		}
 
 		private List<Employee> GetEmployeesByName(string filter)
 		{
-			//Thread.Sleep(2000);
+			Thread.Sleep(1500);
 
 			return MockDatabase.Table.Where(employee => employee.Name.IndexOf(filter, StringComparison.OrdinalIgnoreCase) != -1).ToList();
 		}
 
 		private List<Employee> GetEmployeesByRole(string filter)
 		{
-			//Thread.Sleep(3000);
+			Thread.Sleep(2000);
 
 			return MockDatabase.Table.Where(employee => employee.Role.IndexOf(filter, StringComparison.OrdinalIgnoreCase) != -1).ToList();
 		}
 
 		private List<Employee> GetEmployeesByDepartment(string filter)
 		{
-			//Thread.Sleep(3000);
+			Thread.Sleep(2500);
 
 			return MockDatabase.Table.Where(employee => employee.Department.IndexOf(filter, StringComparison.OrdinalIgnoreCase) != -1).ToList();
 		}
 
 		private List<Employee> GetEmployeesByLocation(string filter)
 		{
-			//Thread.Sleep(3000);
+			Thread.Sleep(3000);
 
 			return MockDatabase.Table.Where(employee => employee.Location.IndexOf(filter, StringComparison.OrdinalIgnoreCase) != -1).ToList();
 		}

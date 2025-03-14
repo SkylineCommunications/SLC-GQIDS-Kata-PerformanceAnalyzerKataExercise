@@ -53,7 +53,7 @@
 
 		private List<Employee> GetEmployees()
 		{
-			Thread.Sleep(5000);
+			Thread.Sleep(10000);
 
 			return MockDatabase.Table;
 		}
@@ -62,35 +62,35 @@
 		{
 			Thread.Sleep(500);
 
-			return MockDatabase.Table.Where(employee => employee.Id.IndexOf(filter, StringComparison.OrdinalIgnoreCase) != -1).ToList();
+			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeeById, filter)).ToList();
 		}
 
 		private List<Employee> GetEmployeesByName(string filter)
 		{
 			Thread.Sleep(1500);
 
-			return MockDatabase.Table.Where(employee => employee.Name.IndexOf(filter, StringComparison.OrdinalIgnoreCase) != -1).ToList();
+			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeesByName, filter)).ToList();
 		}
 
 		private List<Employee> GetEmployeesByRole(string filter)
 		{
 			Thread.Sleep(2000);
 
-			return MockDatabase.Table.Where(employee => employee.Role.IndexOf(filter, StringComparison.OrdinalIgnoreCase) != -1).ToList();
+			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeesByRole, filter)).ToList();
 		}
 
 		private List<Employee> GetEmployeesByDepartment(string filter)
 		{
 			Thread.Sleep(2500);
 
-			return MockDatabase.Table.Where(employee => employee.Department.IndexOf(filter, StringComparison.OrdinalIgnoreCase) != -1).ToList();
+			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeesByDepartment, filter)).ToList();
 		}
 
 		private List<Employee> GetEmployeesByLocation(string filter)
 		{
 			Thread.Sleep(3000);
 
-			return MockDatabase.Table.Where(employee => employee.Location.IndexOf(filter, StringComparison.OrdinalIgnoreCase) != -1).ToList();
+			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeesByLocation, filter)).ToList();
 		}
 	}
 }

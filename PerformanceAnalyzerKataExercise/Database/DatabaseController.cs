@@ -52,6 +52,8 @@
 
 		private List<Employee> GetEmployees()
 		{
+			Authorize();
+
 			MockExecution.GetEmployees();
 
 			return MockDatabase.Table;
@@ -59,6 +61,8 @@
 
 		private List<Employee> GetEmployeeById(string filter)
 		{
+			Authorize();
+
 			MockExecution.GetEmployeeById();
 
 			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeeById, filter)).ToList();
@@ -66,6 +70,8 @@
 
 		private List<Employee> GetEmployeesByName(string filter)
 		{
+			Authorize();
+
 			MockExecution.GetEmployeesByName();
 
 			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeesByName, filter)).ToList();
@@ -73,6 +79,8 @@
 
 		private List<Employee> GetEmployeesByRole(string filter)
 		{
+			Authorize();
+
 			MockExecution.GetEmployeesByRole();
 
 			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeesByRole, filter)).ToList();
@@ -80,6 +88,8 @@
 
 		private List<Employee> GetEmployeesByDepartment(string filter)
 		{
+			Authorize();
+
 			MockExecution.GetEmployeesByDepartment();
 
 			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeesByDepartment, filter)).ToList();
@@ -87,9 +97,16 @@
 
 		private List<Employee> GetEmployeesByLocation(string filter)
 		{
+			Authorize();
+
 			MockExecution.GetEmployeesByLocation();
 
 			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeesByLocation, filter)).ToList();
+		}
+
+		private void Authorize()
+		{
+			MockExecution.Authorize();
 		}
 	}
 }

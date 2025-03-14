@@ -1,13 +1,12 @@
 ﻿namespace PerformanceAnalyzerKataExercise.Database
 {
-	using System;
 	using System.Collections.Generic;
 	using System.ComponentModel;
 	using System.Reflection;
 
 	internal static class Helpers
 	{
-		public static string[] GetQueryDescriptions()
+		internal static string[] GetQueryDescriptions()
 		{
 			var type = typeof(Query);
 			var descriptions = new List<string>();
@@ -28,7 +27,7 @@
 			return descriptions.ToArray();
 		}
 
-		public static Query GetEnumValueFromDescription(string description)
+		internal static Query GetEnumValueFromDescription(string description)
 		{
 			var type = typeof(Query);
 			foreach (var field in type.GetFields(BindingFlags.Public | BindingFlags.Static))

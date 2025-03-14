@@ -16,6 +16,7 @@ namespace PerformanceAnalyzerKataExercise.GQIDSs
 		private readonly InputArguments inputArguments = new InputArguments();
 
 		private DatabaseController databaseController;
+		private IGQILogger logger;
 
 		public GQIArgument[] GetInputArguments()
 		{
@@ -39,6 +40,7 @@ namespace PerformanceAnalyzerKataExercise.GQIDSs
 				.Select(employee => CreateGQIRow(employee))
 				.ToArray();
 
+			databaseController.Disconnect();
 			return new GQIPage(newRows);
 		}
 
@@ -53,6 +55,7 @@ namespace PerformanceAnalyzerKataExercise.GQIDSs
 		public OnDestroyOutputArgs OnDestroy(OnDestroyInputArgs args)
 		{
 			databaseController?.Disconnect();
+			databaseController = null;
 
 			return new OnDestroyOutputArgs();
 		}

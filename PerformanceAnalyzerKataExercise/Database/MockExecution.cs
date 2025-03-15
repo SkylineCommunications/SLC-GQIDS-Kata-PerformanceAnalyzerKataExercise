@@ -23,7 +23,7 @@
 
 		internal static void Authorize()
 		{
-			Thread.Sleep((150 / 3) - (10 * 7) + (15 * 10) - (8 * 5) - 90 + (25 * 8) - 50 + (36 / 3) - (12 * 4) + 100 - 30 + 60 + (12 * 4) - 20 + random.Next(1, 40));
+			Thread.Sleep((10 * 50) + (2000 / 2) - (700 * 2) + (133 * 8) - (452 * 2) + (1400 / 2) + (428 / 2) - (100 * 3) - 200 + random.Next(1, 40));
 		}
 
 		internal static List<Employee> Fetch(string query)

@@ -1,7 +1,9 @@
 ﻿namespace PerformanceAnalyzerKataExercise.Database
 {
 	using System;
+	using System.Collections.Concurrent;
 	using System.Collections.Generic;
+	using System.Linq;
 	using System.Threading;
 	using System.Threading.Tasks;
 
@@ -88,11 +90,11 @@
 		{
 			using (var tracker = new PerformanceTracker(collector))
 			{
-				var processedEmployees = new List<Employee>();
+				var processedEmployees = new ConcurrentBag<Employee>();
 
 				Parallel.ForEach(employees, employee =>
 				{
-					using (var threadTracker = new PerformanceTracker(tracker))
+					using (var threadTracker = new PerformanceTracker(tracker, nameof(MockExecution), nameof(MockExecution.Process)))
 					{
 						threadTracker
 							.AddMetadata("Thread Id", Convert.ToString(Thread.CurrentThread.ManagedThreadId))
@@ -105,7 +107,7 @@
 					}
 				});
 
-				return processedEmployees;
+				return processedEmployees.ToList();
 			}
 		}
 

@@ -4,75 +4,117 @@
 
 	using PerformanceAnalyzerKataExercise.Database.Models;
 
+	using Skyline.DataMiner.Utils.PerformanceAnalyzer;
+	using Skyline.DataMiner.Utils.PerformanceAnalyzer.Loggers;
+
 	internal class DatabaseController
 	{
+		private readonly PerformanceCollector collector;
+
+		internal DatabaseController()
+		{
+			var logger = new PerformanceFileLogger("Kata", "Exercise 1");
+
+			collector = new PerformanceCollector(logger);
+		}
+
 		internal List<Employee> GetAllEmployees()
 		{
-			Connect();
-			var allEmployees = Fetch();
-			var processedEmployees = Process(allEmployees);
-			Store(processedEmployees);
-			Disconnect();
+			using (new PerformanceTracker(collector))
+			{
+				Connect();
+				var allEmployees = Fetch();
+				var processedEmployees = Process(allEmployees);
+				Store(processedEmployees);
+				Disconnect();
 
-			return allEmployees;
+				return allEmployees;
+			}
 		}
 
 		private void Connect()
 		{
-			Authenticate();
-			Authorize();
+			using (new PerformanceTracker(collector))
+			{
+				Authenticate();
+				Authorize();
 
-			MockExecution.Connect();
+				MockExecution.Connect();
+			}
 		}
 
 		private void Authenticate()
 		{
-			MockExecution.Authenticate();
+			using (new PerformanceTracker(collector))
+			{
+				MockExecution.Authenticate();
+			}
 		}
 
 		private void Authorize()
 		{
-			MockExecution.Authorize();
+			using (new PerformanceTracker(collector))
+			{
+				MockExecution.Authorize();
+			}
 		}
 
 		private List<Employee> Fetch()
 		{
-			string query = CreateQuery();
+			using (new PerformanceTracker(collector))
+			{
+				string query = CreateQuery();
 
-			var allEmployees = MockExecution.Fetch(query);
+				var allEmployees = MockExecution.Fetch(query);
 
-			return allEmployees;
+				return allEmployees;
+			}
 		}
 
 		private string CreateQuery()
 		{
-			string query = MockExecution.CreateQuery();
+			using (new PerformanceTracker(collector))
+			{
+				string query = MockExecution.CreateQuery();
 
-			return query;
+				return query;
+			}
 		}
 
 		private List<Employee> Process(List<Employee> employees)
 		{
-			var processedEmployees = new List<Employee>();
-
-			foreach (var employee in employees)
+			using (new PerformanceTracker(collector))
 			{
-				var processedEmployee = MockExecution.Process(employee);
+				var processedEmployees = new List<Employee>();
 
-				processedEmployees.Add(processedEmployee);
+				foreach (var employee in employees)
+				{
+					using (new PerformanceTracker(collector))
+					{
+						var processedEmployee = MockExecution.Process(employee);
+
+						processedEmployees.Add(processedEmployee);
+					}
+				}
+
+				return processedEmployees;
 			}
-
-			return processedEmployees;
 		}
 
 		private void Store(List<Employee> employees)
 		{
-			MockExecution.Store(employees);
+			using (new PerformanceTracker(collector))
+			{
+				MockExecution.Store(employees);
+			}
 		}
 
 		private void Disconnect()
 		{
-			MockExecution.Disconnect();
+			using (new PerformanceTracker(collector))
+			{
+				MockExecution.Disconnect();
+			}
 		}
 	}
 }

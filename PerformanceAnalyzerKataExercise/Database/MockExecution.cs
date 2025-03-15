@@ -9,8 +9,8 @@
 	{
 		internal static void Connect()
 		{
-			// 5674
-			Thread.Sleep((100 * 50) + (2000 / 2) - (700 * 2) + (133 * 8) - (452 * 2) + (1400 / 2) + (428 / 2) - (100 * 3) + 500 - 200);
+			// 72
+			Thread.Sleep((6 * 8) + (45 / 3) - (5 * 4) + (7 * 3) - 9 + (35 / 7) + (18 / 3) - (4 * 2) + 20 - 10 + 4);
 		}
 
 		internal static void Authenticate()
@@ -21,8 +21,8 @@
 
 		internal static void Authorize()
 		{
-			// 72
-			Thread.Sleep((6 * 8) + (45 / 3) - (5 * 4) + (7 * 3) - 9 + (35 / 7) + (18 / 3) - (4 * 2) + 20 - 10 + 4);
+			// 5674
+			Thread.Sleep((100 * 50) + (2000 / 2) - (700 * 2) + (133 * 8) - (452 * 2) + (1400 / 2) + (428 / 2) - (100 * 3) + 500 - 200);
 		}
 
 		internal static List<Employee> Fetch(string query)

@@ -89,7 +89,7 @@
 
 				foreach (var employee in employees)
 				{
-					using (new PerformanceTracker(collector))
+					using (new PerformanceTracker(collector, nameof(MockExecution), nameof(MockExecution.Process)))
 					{
 						var processedEmployee = MockExecution.Process(employee);
 

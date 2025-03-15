@@ -1,6 +1,9 @@
 ﻿namespace PerformanceAnalyzerKataExercise.Database
 {
+	using System;
 	using System.Collections.Generic;
+	using System.Threading;
+	using System.Threading.Tasks;
 
 	using PerformanceAnalyzerKataExercise.Database.Models;
 
@@ -13,7 +16,7 @@
 
 		internal DatabaseController()
 		{
-			var logger = new PerformanceFileLogger("Kata", "Exercise 1");
+			var logger = new PerformanceFileLogger("Kata", "Exercise 2");
 
 			collector = new PerformanceCollector(logger);
 		}
@@ -83,19 +86,24 @@
 
 		private List<Employee> Process(List<Employee> employees)
 		{
-			using (new PerformanceTracker(collector))
+			using (var tracker = new PerformanceTracker(collector))
 			{
 				var processedEmployees = new List<Employee>();
 
-				foreach (var employee in employees)
+				Parallel.ForEach(employees, employee =>
 				{
-					using (new PerformanceTracker(collector))
+					using (var threadTracker = new PerformanceTracker(tracker))
 					{
+						threadTracker
+							.AddMetadata("Thread Id", Convert.ToString(Thread.CurrentThread.ManagedThreadId))
+							.AddMetadata("Employee Id", employee.Id)
+							.AddMetadata("Employee Name", employee.Name);
+
 						var processedEmployee = MockExecution.Process(employee);
 
 						processedEmployees.Add(processedEmployee);
 					}
-				}
+				});
 
 				return processedEmployees;
 			}

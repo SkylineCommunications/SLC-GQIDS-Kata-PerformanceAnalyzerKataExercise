@@ -12,7 +12,7 @@
 
 		internal static void Connect()
 		{
-			Thread.Sleep((100 * 50) + (2000 / 2) - (700 * 2) + (133 * 8) - (452 * 2) + (1400 / 2) + (428 / 2) - (100 * 3) + 500 - 200 + random.Next(1, 40));
+			Thread.Sleep((6 * 8) + (45 / 3) - (5 * 4) + (7 * 3) - 9 + (35 / 7) + (18 / 3) - (4 * 2) + 20 - 10 + 4 + random.Next(1, 40));
 		}
 
 		internal static void Authenticate()
@@ -22,7 +22,7 @@
 
 		internal static void Authorize()
 		{
-			Thread.Sleep((6 * 8) + (45 / 3) - (5 * 4) + (7 * 3) - 9 + (35 / 7) + (18 / 3) - (4 * 2) + 20 - 10 + 4 + random.Next(1, 40));
+			Thread.Sleep((10 * 50) + (2000 / 2) - (700 * 2) + (133 * 8) - (452 * 2) + (1400 / 2) + (428 / 2) - (100 * 3) - 200 + random.Next(1, 40));
 		}
 
 		internal static List<Employee> Fetch(string query)
@@ -34,7 +34,7 @@
 
 		internal static Employee Process(Employee employee)
 		{
-			Thread.Sleep((5 * 4) + (30 / 2) - (7 * 2) + (3 * 3) - 8 + (14 / 7) + (6 / 2) - (1 * 3) - 2 + random.Next(1, 40));
+			Thread.Sleep((15 * 4) + (30 / 2) - (7 * 2) + (3 * 3) - 8 + (14 / 7) + (6 / 2) - (1 * 3) - 2 + random.Next(1, 40));
 
 			return employee;
 		}

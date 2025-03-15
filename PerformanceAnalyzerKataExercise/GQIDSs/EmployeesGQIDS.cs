@@ -6,56 +6,68 @@ namespace PerformanceAnalyzerKataExercise.GQIDSs
 
 	using PerformanceAnalyzerKataExercise.Database;
 	using PerformanceAnalyzerKataExercise.Database.Models;
-	using PerformanceAnalyzerKataExercise.GQIDSs.Arguments;
 
 	using Skyline.DataMiner.Analytics.GenericInterface;
 
 	[GQIMetaData(Name = "Employees Table")]
-	public sealed class EmployeesGQIDS : IGQIDataSource, IGQIOnPrepareFetch, IGQIInputArguments
+	public sealed class EmployeesGQIDS : IGQIDataSource, IGQIOnPrepareFetch, IGQIOnInit
 	{
-		private readonly InputArguments inputArguments = new InputArguments();
-
 		private DatabaseController databaseController;
-
-		public GQIArgument[] GetInputArguments()
-		{
-			return inputArguments.GetArguments();
-		}
-
-		public OnArgumentsProcessedOutputArgs OnArgumentsProcessed(OnArgumentsProcessedInputArgs args)
-		{
-			return inputArguments.ProcessArguments(args);
-		}
+		private GQIColumn[] gqiColumns;
+		private IGQILogger logger;
 
 		public GQIColumn[] GetColumns()
 		{
-			return inputArguments.GQIColumns;
+			logger.Error($"{nameof(GetColumns)}");
+			return CreateGQIColumns();
 		}
 
 		public GQIPage GetNextPage(GetNextPageInputArgs args)
 		{
-			var newRows = databaseController
-				.ExecuteQuery(inputArguments.Query, inputArguments.Filter)
+			logger.Error($"{nameof(GetNextPage)}");
+			var gqiRows = databaseController
+				.GetAllEmployees()
 				.Select(employee => CreateGQIRow(employee))
 				.ToArray();
 
-			databaseController.Disconnect();
-			return new GQIPage(newRows);
+			return new GQIPage(gqiRows);
+		}
+
+		public OnInitOutputArgs OnInit(OnInitInputArgs args)
+		{
+			logger = args.Logger;
+			logger.Error($"{nameof(OnInit)}");
+
+			return new OnInitOutputArgs();
 		}
 
 		public OnPrepareFetchOutputArgs OnPrepareFetch(OnPrepareFetchInputArgs args)
 		{
+			logger.Error($"{nameof(OnPrepareFetch)}");
 			databaseController = new DatabaseController();
-			databaseController.Connect();
 
 			return new OnPrepareFetchOutputArgs();
+		}
+
+		private GQIColumn[] CreateGQIColumns()
+		{
+			gqiColumns = new GQIColumn[]
+			{
+				new GQIStringColumn("Id"),
+				new GQIStringColumn("Name"),
+				new GQIStringColumn("Role"),
+				new GQIStringColumn("Department"),
+				new GQIStringColumn("Location"),
+			};
+
+			return gqiColumns;
 		}
 
 		private GQIRow CreateGQIRow(Employee employee)
 		{
 			var cells = new List<GQICell>();
 
-			foreach (var column in inputArguments.GQIColumns)
+			foreach (var column in gqiColumns)
 			{
 				switch (column.Name)
 				{

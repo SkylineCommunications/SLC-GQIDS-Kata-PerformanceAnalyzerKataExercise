@@ -1,165 +1,78 @@
 ﻿namespace PerformanceAnalyzerKataExercise.Database
 {
-	using System;
 	using System.Collections.Generic;
-	using System.Linq;
 
 	using PerformanceAnalyzerKataExercise.Database.Models;
 
-	using Skyline.DataMiner.Utils.PerformanceAnalyzer;
-	using Skyline.DataMiner.Utils.PerformanceAnalyzer.Loggers;
-
 	internal class DatabaseController
 	{
-		private static int instanceCount = 0;
-		private static PerformanceCollector performanceCollector;
-		private static PerformanceTracker performanceTracker;
-
-		internal DatabaseController()
+		internal List<Employee> GetAllEmployees()
 		{
-			var performanceLogger = new PerformanceFileLogger("Kata", "Kata Exercise");
-			performanceCollector = new PerformanceCollector(performanceLogger);
+			Connect();
+			var allEmployees = Fetch();
+			var processedEmployees = Process(allEmployees);
+			Store(processedEmployees);
+			Disconnect();
 
-			performanceTracker = new PerformanceTracker(performanceCollector, nameof(DatabaseController), nameof(DatabaseController));
-			instanceCount++;
+			return allEmployees;
 		}
 
-		internal void Connect()
+		private void Connect()
 		{
-			using (new PerformanceTracker(performanceCollector))
-			{
-				MockExecution.Connect();
-			}
-		}
-
-		internal List<Employee> ExecuteQuery(Query query, string filter)
-		{
-			using (new PerformanceTracker(performanceCollector))
-			{
-				if (String.IsNullOrWhiteSpace(filter))
-				{
-					return GetEmployees();
-				}
-
-				switch (query)
-				{
-					case Query.GetEmployees:
-						return GetEmployees();
-
-					case Query.GetEmployeeById:
-						return GetEmployeeById(filter);
-
-					case Query.GetEmployeesByName:
-						return GetEmployeesByName(filter);
-
-					case Query.GetEmployeesByRole:
-						return GetEmployeesByRole(filter);
-
-					case Query.GetEmployeesByDepartment:
-						return GetEmployeesByDepartment(filter);
-
-					case Query.GetEmployeesByLocation:
-						return GetEmployeesByLocation(filter);
-
-					default:
-						return new List<Employee>();
-				}
-			}
-		}
-
-		internal void Disconnect()
-		{
-			using (new PerformanceTracker(performanceCollector))
-			{
-				MockExecution.Disconnect();
-			}
-
-			if (--instanceCount == 0)
-			{
-				performanceTracker.Dispose();
-				performanceCollector = null;
-				performanceTracker = null;
-			}
-		}
-
-		private List<Employee> GetEmployees()
-		{
+			Authenticate();
 			Authorize();
 
-			using (new PerformanceTracker(performanceCollector, nameof(MockExecution), nameof(MockExecution.GetEmployees)))
-			{
-				MockExecution.GetEmployees();
-			}
-
-			return MockDatabase.Table;
+			MockExecution.Connect();
 		}
 
-		private List<Employee> GetEmployeeById(string filter)
+		private void Authenticate()
 		{
-			Authorize();
-
-			using (new PerformanceTracker(performanceCollector, nameof(MockExecution), nameof(MockExecution.GetEmployeeById)))
-			{
-				MockExecution.GetEmployeeById();
-			}
-
-			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeeById, filter)).ToList();
-		}
-
-		private List<Employee> GetEmployeesByName(string filter)
-		{
-			Authorize();
-
-			using (new PerformanceTracker(performanceCollector, nameof(MockExecution), nameof(MockExecution.GetEmployeesByName)))
-			{
-				MockExecution.GetEmployeesByName();
-			}
-
-			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeesByName, filter)).ToList();
-		}
-
-		private List<Employee> GetEmployeesByRole(string filter)
-		{
-			Authorize();
-
-			using (new PerformanceTracker(performanceCollector, nameof(MockExecution), nameof(MockExecution.GetEmployeesByRole)))
-			{
-				MockExecution.GetEmployeesByRole();
-			}
-
-			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeesByRole, filter)).ToList();
-		}
-
-		private List<Employee> GetEmployeesByDepartment(string filter)
-		{
-			Authorize();
-
-			using (new PerformanceTracker(performanceCollector, nameof(MockExecution), nameof(MockExecution.GetEmployeesByDepartment)))
-			{
-				MockExecution.GetEmployeesByDepartment();
-			}
-
-			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeesByDepartment, filter)).ToList();
-		}
-
-		private List<Employee> GetEmployeesByLocation(string filter)
-		{
-			Authorize();
-
-			using (new PerformanceTracker(performanceCollector, nameof(MockExecution), nameof(MockExecution.GetEmployeesByLocation)))
-			{
-				MockExecution.GetEmployeesByLocation();
-			}
-
-			return MockDatabase.Table.Where(employee => employee.Equals(Query.GetEmployeesByLocation, filter)).ToList();
+			MockExecution.Authenticate();
 		}
 
 		private void Authorize()
 		{
-			using (new PerformanceTracker(performanceCollector))
+			MockExecution.Authorize();
+		}
+
+		private List<Employee> Fetch()
+		{
+			string query = CreateQuery();
+
+			var allEmployees = MockExecution.Fetch(query);
+
+			return allEmployees;
+		}
+
+		private string CreateQuery()
+		{
+			string query = MockExecution.CreateQuery();
+
+			return query;
+		}
+
+		private List<Employee> Process(List<Employee> employees)
+		{
+			var processedEmployees = new List<Employee>();
+
+			foreach (var employee in employees)
 			{
-				MockExecution.Authorize();
+				var processedEmployee = MockExecution.Process(employee);
+
+				processedEmployees.Add(processedEmployee);
 			}
+
+			return processedEmployees;
+		}
+
+		private void Store(List<Employee> employees)
+		{
+			MockExecution.Store(employees);
+		}
+
+		private void Disconnect()
+		{
+			MockExecution.Disconnect();
 		}
 	}
 }

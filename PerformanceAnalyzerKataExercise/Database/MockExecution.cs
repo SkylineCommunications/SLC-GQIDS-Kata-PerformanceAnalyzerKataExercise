@@ -1,52 +1,64 @@
 ﻿namespace PerformanceAnalyzerKataExercise.Database
 {
+	using System.Collections.Generic;
 	using System.Threading;
 
+	using PerformanceAnalyzerKataExercise.Database.Models;
+
 	internal static class MockExecution
-    {
+	{
 		internal static void Connect()
 		{
-			Thread.Sleep((((((((((((((((((30 + 10) * 2) - 20) + 50) * 2) / 2) + 75) * 3) - 30) + 600) / 2) * 4) - 250) + 1000) / 2) + 750) * 2) - 1500);
+			// 5674
+			Thread.Sleep((100 * 50) + (2000 / 2) - (700 * 2) + (133 * 8) - (452 * 2) + (1400 / 2) + (428 / 2) - (100 * 3) + 500 - 200);
 		}
 
-		internal static void Disconnect()
+		internal static void Authenticate()
 		{
-			Thread.Sleep(((((((((((((((((40 + 20) * 2) - 30) + 70) * 2) / 2) + 100) * 3) - 40) + 800) / 2) * 4) - 300) + 1500) / 2) + 1000) - 2000);
+			// 77
+			Thread.Sleep((10 * 5) + (20 / 2) - (5 * 3) + (4 * 4) - 6 + (28 / 7) + (12 / 2) - (2 * 3) + 15 - 5 + 8);
 		}
 
 		internal static void Authorize()
 		{
-			Thread.Sleep(((((((((((((((((50 + 30) * 2) - 40) + 90) * 2) / 2) + 120) * 3) - 60) + 700) / 2) * 4) - 300) + 1000) / 2) + 500) - 2000);
+			// 72
+			Thread.Sleep((6 * 8) + (45 / 3) - (5 * 4) + (7 * 3) - 9 + (35 / 7) + (18 / 3) - (4 * 2) + 20 - 10 + 4);
 		}
 
-		internal static void GetEmployees()
+		internal static List<Employee> Fetch(string query)
 		{
-			Thread.Sleep(((((((((((((((((((50 + 25) * 2) - 40) + 100) * 2) / 2) + 200) * 3) - 50) + 1500) / 2) * 4) - 300) + 2500) / 2) + 1250) * 2) - 2500) - (5 * (100 + (4 * 100))));
+			// 322
+			Thread.Sleep((150 / 3) - (10 * 7) + (25 * 8) - 50 + (36 / 3) - (12 * 4) + 100 - 30 + 60 + (15 * 10) - (8 * 5) - 90 + (12 * 4) + 50 - 20);
+
+			return MockDatabase.Table;
 		}
 
-		internal static void GetEmployeeById()
+		internal static Employee Process(Employee employee)
 		{
-			Thread.Sleep((((((((((((((((((5 + 3) * 2) - 6) + 12) * 2) / 2) + 20) * 3) - 10) + 100) / 2) * 2) - 50) + 250) / 2) + 125) * 2) - 250);
+			// 22
+			Thread.Sleep((5 * 4) + (30 / 2) - (7 * 2) + (3 * 3) - 8 + (14 / 7) + (6 / 2) - (1 * 3) - 2);
+
+			return employee;
 		}
 
-		internal static void GetEmployeesByName()
+		internal static string CreateQuery()
 		{
-			Thread.Sleep(((((((((((((((((((10 + 5) * 2) - 15) + 35) * 2) / 2) + 50) * 3) - 25) + 200) / 2) * 4) - 150) + 500) / 2) + 250) * 2) - 500) + 500);
+			// 27
+			Thread.Sleep((5 * 3) + (30 / 5) - (10 / 2) + (6 * 2) - 8 + (14 / 7) + (12 / 4) - (3 * 1) + 7 - 4 + 2);
+
+			return "SELECT * FROM Employees";
 		}
 
-		internal static void GetEmployeesByRole()
+		internal static void Store(List<Employee> employees)
 		{
-			Thread.Sleep(((((((((((((((((((20 + 5) * 2) - 15) + 35) * 2) / 2) + 50) * 3) - 25) + 400) / 2) * 4) - 150) + 1000) / 2) + 500) * 2) - 1000) + 1000);
+			// 738
+			Thread.Sleep((50 * 14) + (100 / 2) - (70 * 3) + (13 * 12) - 40 + (140 / 2) + (20 / 2) - (10 * 5) - 30 + (21 * 10) - (4 * 6) - 90 + (3 * 2) - 20);
 		}
 
-		internal static void GetEmployeesByDepartment()
+		internal static void Disconnect()
 		{
-			Thread.Sleep(((((((((((((((((((25 + 10) * 2) - 20) + 50) * 2) / 2) + 75) * 3) - 30) + 500) / 2) * 4) - 200) + 1500) / 2) + 750) * 2) - 1500) + 500);
-		}
-
-		internal static void GetEmployeesByLocation()
-		{
-			Thread.Sleep((((((((((((((((((30 + 15) * 2) - 25) + 65) * 2) / 2) + 100) * 3) - 35) + 600) / 2) * 4) - 250) + 2000) / 2) + 1000) * 2) - 2000);
+			// 101
+			Thread.Sleep((10 * 10) + (50 / 2) - (5 * 4) + (20 * 2) - 30 + (70 / 7) + (40 / 2) - (8 * 3) - 20);
 		}
 	}
 }

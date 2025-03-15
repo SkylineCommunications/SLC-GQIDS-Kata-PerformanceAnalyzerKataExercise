@@ -34,7 +34,7 @@
 
 		internal static Employee Process(Employee employee)
 		{
-			Thread.Sleep((15 * 4) + (30 / 2) - (7 * 2) + (3 * 3) - 8 + (14 / 7) + (6 / 2) - (1 * 3) - 2 + random.Next(1, 40));
+			Thread.Sleep((5 * 4) + (30 / 2) - (7 * 2) + (3 * 3) - 8 + (14 / 7) + (6 / 2) - (1 * 3) - 2 + random.Next(1, 40));
 
 			return employee;
 		}

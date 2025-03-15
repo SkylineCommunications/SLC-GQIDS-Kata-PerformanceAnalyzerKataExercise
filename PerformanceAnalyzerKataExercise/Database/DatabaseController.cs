@@ -18,7 +18,7 @@
 
 		internal DatabaseController()
 		{
-			var logger = new PerformanceFileLogger("Kata", "Exercise 2");
+			var logger = new PerformanceFileLogger("Kata", "Exercise 3");
 
 			collector = new PerformanceCollector(logger);
 		}

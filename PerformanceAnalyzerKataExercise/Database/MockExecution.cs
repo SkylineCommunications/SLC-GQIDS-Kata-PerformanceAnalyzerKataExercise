@@ -9,6 +9,7 @@
 	internal static class MockExecution
 	{
 		private static Random random = new Random();
+		private static string randomUserId = Convert.ToString(random.Next(1, 101));
 
 		internal static void Connect()
 		{
@@ -34,7 +35,14 @@
 
 		internal static Employee Process(Employee employee)
 		{
-			Thread.Sleep((15 * 4) + (30 / 2) - (7 * 2) + (3 * 3) - 8 + (14 / 7) + (6 / 2) - (1 * 3) - 2 + random.Next(1, 40));
+			if (employee.Id == randomUserId)
+			{
+				Thread.Sleep((33 * 4) + (30 / 2) - (7 * 2) + (3 * 3) - 8 + (14 / 7) + (6 / 2) - (1 * 3) - 2 + random.Next(2000, 2500));
+			}
+			else
+			{
+				Thread.Sleep((15 * 4) + (30 / 2) - (7 * 2) + (3 * 3) - 8 + (14 / 7) + (6 / 2) - (1 * 3) - 2 + random.Next(1, 40));
+			}
 
 			return employee;
 		}

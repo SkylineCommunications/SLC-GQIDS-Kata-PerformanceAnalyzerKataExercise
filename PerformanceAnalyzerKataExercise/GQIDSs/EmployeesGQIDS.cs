@@ -10,21 +10,18 @@ namespace PerformanceAnalyzerKataExercise.GQIDSs
 	using Skyline.DataMiner.Analytics.GenericInterface;
 
 	[GQIMetaData(Name = "Employees Table")]
-	public sealed class EmployeesGQIDS : IGQIDataSource, IGQIOnPrepareFetch, IGQIOnInit
+	public sealed class EmployeesGQIDS : IGQIDataSource, IGQIOnPrepareFetch
 	{
 		private DatabaseController databaseController;
 		private GQIColumn[] gqiColumns;
-		private IGQILogger logger;
 
 		public GQIColumn[] GetColumns()
 		{
-			logger.Error($"{nameof(GetColumns)}");
 			return CreateGQIColumns();
 		}
 
 		public GQIPage GetNextPage(GetNextPageInputArgs args)
 		{
-			logger.Error($"{nameof(GetNextPage)}");
 			var gqiRows = databaseController
 				.GetAllEmployees()
 				.Select(employee => CreateGQIRow(employee))
@@ -33,17 +30,8 @@ namespace PerformanceAnalyzerKataExercise.GQIDSs
 			return new GQIPage(gqiRows);
 		}
 
-		public OnInitOutputArgs OnInit(OnInitInputArgs args)
-		{
-			logger = args.Logger;
-			logger.Error($"{nameof(OnInit)}");
-
-			return new OnInitOutputArgs();
-		}
-
 		public OnPrepareFetchOutputArgs OnPrepareFetch(OnPrepareFetchInputArgs args)
 		{
-			logger.Error($"{nameof(OnPrepareFetch)}");
 			databaseController = new DatabaseController();
 
 			return new OnPrepareFetchOutputArgs();

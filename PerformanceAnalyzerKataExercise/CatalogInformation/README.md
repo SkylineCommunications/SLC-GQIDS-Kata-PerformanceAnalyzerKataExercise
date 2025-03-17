@@ -1,8 +1,8 @@
-### Performance Analyzer Kata Exercise GQIDS
+### Tutorial - Introduction to Performance Analyzer
 
 #### Overview
 
-The Performance Analyzer Kata Exercise GQIDS is supplementary data source for the [Kata #64: Introduction to Performance Analyzer]().
+This package is supplementary data source for the [Kata #64: Introduction to Performance Analyzer]().
 
 > [!TIP]
 > You can find the exercise on our [docs page]().

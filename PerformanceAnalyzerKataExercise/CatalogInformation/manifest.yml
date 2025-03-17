@@ -16,7 +16,7 @@
 #   - System Health: If the Catalog item is intended to monitor the health of a system.
 #   - User-Defined API: If the Catalog item is a DataMiner Automation script designed as a user-defined API.
 #   - Visual Overview: If the Catalog item is a Microsoft Visio design.
-type: Ad Hoc Data Source
+type: Learning & Samples
 
 # [Required]
 # The ID of the Catalog item.
@@ -34,7 +34,7 @@ id: d59135c3-36de-43bb-af16-d649360b5126
 #   Max length: 100 characters.
 #   Cannot contain newlines.
 #   Cannot contain leading or trailing whitespace characters.
-title: Performance Analyzer Kata Exercise GQIDS
+title: Tutorial - Introduction to Performance Analyzer
 
 # [Optional]
 # General information about the Catalog item.
@@ -68,7 +68,7 @@ owners:
 #   Cannot contain newlines.
 #   Cannot contain leading or trailing whitespace characters.
 tags:
-  - GQI
-  - GQIDS
-  - Kata
+  - KATA
+  - Tutorial
   - Performance Analyzer
+  - GQIDS

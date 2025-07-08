@@ -34,23 +34,19 @@ Follow these steps to set it up:
 
 1. Create a GitHub repository by going to **Git > Create Git Repository**, selecting GitHub, and filling in the wizard before clicking **Create and Push**.
 
-1. Set up the required secrets and variables:
-
-   ### Required Secrets
-   - `DATAMINER_TOKEN`: Organization key from [admin.dataminer.services](https://admin.dataminer.services/) with the following scopes:
-     - **Register catalog items**
-     - **Read catalog items**
-     - **Download catalog versions**
-   - `SONAR_TOKEN`: API key for access to SonarCloud (for code quality analysis)
+1. Set up the required variables:
 
    ### Required Variables
    - `SONAR_NAME`: SonarCloud project ID (Go to [https://sonarcloud.io/projects/create](https://sonarcloud.io/projects/create) and create a project)
 
-1. Add these secrets and variables by navigating to **Settings > Secrets and variables > Actions** in your GitHub repository.
+1. Add this variable by navigating to **Settings > Secrets and variables > Actions** in your GitHub repository.
 
 1. The workflow will automatically run when you create releases with version tags.
 
 With this setup, creating a release with a version tag will trigger the complete workflow with quality gates, code analysis, and Catalog publishing.
+
+> [!NOTE]
+> For internal Skyline Communications repositories, authentication tokens are managed automatically. External organizations may need additional configuration.
 
 ### Releasing a Specific Version
 

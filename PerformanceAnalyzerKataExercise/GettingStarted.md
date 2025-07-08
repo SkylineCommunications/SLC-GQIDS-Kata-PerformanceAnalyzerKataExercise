@@ -37,7 +37,7 @@ Follow these steps to set it up:
 1. Set up the required variables:
 
    ### Required Variables
-   - `SONAR_NAME`: SonarCloud project ID (Go to [https://sonarcloud.io/projects/create](https://sonarcloud.io/projects/create) and create a project)
+   - `SONAR_NAME`: SonarCloud project ID. For this project, use: `SkylineCommunications_SLC-GQIDS-Kata-PerformanceAnalyzerKataExercise`
 
 1. Add this variable by navigating to **Settings > Secrets and variables > Actions** in your GitHub repository.
 

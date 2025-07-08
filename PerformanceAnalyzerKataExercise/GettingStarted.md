@@ -27,39 +27,30 @@ Follow the provided **Getting Started** guide in the new project for further ins
 
 This project was created with support for publishing to the DataMiner Catalog.  
 You can publish your artifact either manually via the Visual Studio IDE or by setting up a CI/CD workflow.
-## Publishing to the Catalog with Basic CI/CD Workflow
+## Publishing to the Catalog with Complete CI/CD Workflow
 
-This project includes a basic GitHub workflow for Catalog publishing.  
+This project includes a complete GitHub workflow with quality gates for Catalog publishing.  
 Follow these steps to set it up:
 
 1. Create a GitHub repository by going to **Git > Create Git Repository**, selecting GitHub, and filling in the wizard before clicking **Create and Push**.
 
-1. In GitHub, go to the *Actions* tab.
+1. Set up the required secrets and variables:
 
-1. Click the workflow run that failed (usually called *Add project files*).
+   ### Required Secrets
+   - `DATAMINER_TOKEN`: Organization key from [admin.dataminer.services](https://admin.dataminer.services/) with the following scopes:
+     - **Register catalog items**
+     - **Read catalog items**
+     - **Download catalog versions**
+   - `SONAR_TOKEN`: API key for access to SonarCloud (for code quality analysis)
 
-1. Click the "build" step that failed and read the failing error.
+   ### Required Variables
+   - `SONAR_NAME`: SonarCloud project ID (Go to [https://sonarcloud.io/projects/create](https://sonarcloud.io/projects/create) and create a project)
 
-   ``` text
-   Error: DATAMINER_TOKEN is not set. Release not possible!
-   Please create or re-use an admin.dataminer.services token by visiting: https://admin.dataminer.services/.
-   Navigate to the right Organization then go to Keys and create/find a key with permissions to Register Catalog Items.
-   Copy the value of the token.
-   Then set a DATAMINER_TOKEN secret in your repository settings: **Dynamic Link**
-   ```
+1. Add these secrets and variables by navigating to **Settings > Secrets and variables > Actions** in your GitHub repository.
 
-   You can use the links from the actual error to better address the next couple of steps.
+1. The workflow will automatically run when you create releases with version tags.
 
-1. Obtain an **Organization Key** from [admin.dataminer.services](https://admin.dataminer.services/) with the following scopes:
-   - **Register catalog items**
-   - **Read catalog items**
-   - **Download catalog versions**
-
-1. Add the key as a secret in your GitHub repository, by navigating to **Settings > Secrets and variables > Actions** and creating a secret named `DATAMINER_TOKEN`.
-
-1. Re-run the workflow.
-
-With this setup, any push with new content (including the initial creation) to the main/master branch will generate a new pre-release version, using the latest commit message as the version description.
+With this setup, creating a release with a version tag will trigger the complete workflow with quality gates, code analysis, and Catalog publishing.
 
 ### Releasing a Specific Version
 
